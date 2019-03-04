@@ -11,6 +11,10 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import axios from '../../axios-order';
 
+import { connect } from 'react-redux';
+
+import * as actionTypes from '../../stote/action'
+
 //import { Redirect } from 'react-router-dom';
 class BurgerBuilder extends Component{
     
@@ -165,6 +169,18 @@ class BurgerBuilder extends Component{
                 {this.state.redirect}
             </Hoc>
         );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+         ings : state.ingredients
+    }
+}
+
+const mapDispactchToProps = dispact =>{
+    return {
+        onIngreidentAdded : () => dispact()
     }
 }
 
