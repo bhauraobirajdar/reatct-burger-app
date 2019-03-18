@@ -19,7 +19,7 @@ const BuildControls = (props) =>(
              key={ele.label} 
              type={ele.type} 
              addIngredent={() => props.clickMore(ele.type)}
-             removeIngredients={props.clickLess}
+             removeIngredients={() => props.clickLess(ele.type)}
              disableStatus={props.disabledInfo[ele.type]}
              />
         ))}

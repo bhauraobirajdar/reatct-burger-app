@@ -1,5 +1,4 @@
 import React, {Component } from 'react';
-
 import CheckoutSummary from '../../components/Burger/CheckoutSummary/CheckoutSummary';
 
 import ContactData from '../Checkout/ContactData/ContactData';
@@ -10,8 +9,7 @@ class Checkout extends Component{
     
     state = {
         ingredients :null,
-        price : 0
-        
+        price : 0        
       }
 
       componentWillMount = () =>{

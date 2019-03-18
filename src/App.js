@@ -7,10 +7,12 @@ import Orders from './containers/Orders/Orders'
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-import { Reducer } from './stote/reducer';
 
-const store = createStore(Reducer);
+import  reducer  from './stote/reducer';
+
+const store = createStore(reducer);
 
 class App extends Component {
 
@@ -30,6 +32,6 @@ class App extends Component {
       </Provider>
     );
   }
-}
+};
 
 export default App;
