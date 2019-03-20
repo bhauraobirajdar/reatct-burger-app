@@ -50,10 +50,10 @@ class BurgerBuilder extends Component{
             return pre + cur;
         },0);
 
-        this.setState({
-            purchasable : sum > 0
-        })
-        console.log("Sum iss ",sum);
+        // this.setState({
+        //     purchasable : sum > 0
+        // })
+        return sum > 0;
       }
 
     //   addIngredent = (type) => {
@@ -103,18 +103,22 @@ class BurgerBuilder extends Component{
 
       purchaseConitnueHandler = () =>{
        
+//Old code
+        // const QueryParams = [];
 
-        const QueryParams = [];
+        // for(let i in this.state.ingredients){
+        //     QueryParams.push(encodeURIComponent(i) + '=' +encodeURIComponent(this.state.ingredients[i]));
+        // }
+        // QueryParams.push("price="+this.state.totalPrice);
+        // const queryString = QueryParams.join('&');
+        // this.props.history.push({
+        //     pathname : '/checkout',
+        //     search : '?'+queryString
+        // })
 
-        for(let i in this.state.ingredients){
-            QueryParams.push(encodeURIComponent(i) + '=' +encodeURIComponent(this.state.ingredients[i]));
-        }
-        QueryParams.push("price="+this.state.totalPrice);
-        const queryString = QueryParams.join('&');
-        this.props.history.push({
-            pathname : '/checkout',
-            search : '?'+queryString
-        })
+        //New code
+        this.props.history.push('/checkout');
+
       }
 
    
@@ -124,8 +128,6 @@ class BurgerBuilder extends Component{
         let disabledInfo = {
             ...this.props.ings
         };
-
-
         
         for(let obj in disabledInfo){
             disabledInfo[obj] = disabledInfo[obj] <= 0;
@@ -145,15 +147,17 @@ class BurgerBuilder extends Component{
                     clickLess={this.props.onIngreidentRemoved}
                     disabledInfo={disabledInfo}
                     totalPrice={this.props.price}
-                    purchasable={this.state.purchasable}
+                    purchasable={this.updatePurchasable(this.props.ings)}
                     updateShowModelEvent={this.purchasehandler} />
                 </Hoc>
             );
 
-            orderSummary = <OrderSummary ingredient={this.props.ings}
-            cancelPurchase={this.cancelPurchases}
-            purchaseConitnueHandler={this.purchaseConitnueHandler}
-            price={this.state.totalPrice}  />;
+            orderSummary = <OrderSummary
+                                ingredient={this.props.ings}
+                                cancelPurchase={this.cancelPurchases}
+                                purchaseConitnueHandler={this.purchaseConitnueHandler}
+                                price={this.props.price}  
+                            />;
             
          }
          if(this.state.loading) {
